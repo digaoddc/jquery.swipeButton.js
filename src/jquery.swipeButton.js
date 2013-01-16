@@ -15,8 +15,8 @@
 		return this.filter('[data-swipeurl]').each(function(i, el){
 			var $e = $(el);
 			var $parent = $(el).parent('ul');
-
-			$e.on(o.direction, function ( e ) {
+			$e.attr("id" ,"swipe-"+i);
+			$(document).on('swipeleft', "#"+ $e.attr("id"),  function(event){
 
 				// reference the current item
 				var $li = $(this);
