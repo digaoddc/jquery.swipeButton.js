@@ -1,6 +1,7 @@
 /*
 	Name: jquery.swipeButton.js
 	Author: Andy andyMatthews
+	Forked by: Rodrigo Coutinho (digaoddc)
 	Website: http://andyMatthews.net
 	Version: 1.2.1
 */
@@ -46,12 +47,15 @@
 						$li.find('.ui-btn').hide().animate({ width: 'toggle' }, 200);
 
 						// override row click
-						$('div a:not(' + o.btnClass + ')', $li).on('click.swipe', function(e){
-							e.stopPropagation();
-							e.preventDefault();
-							$(this).off('click.swipe');
-							$li.removeClass('ui-btn-active').find('div.ui-btn').remove();
-						});
+					    $li.on('vclick.swipe', function (e) {
+	                        e.stopPropagation();
+	                        e.preventDefault();
+	                        $(this).off('vclick.swipe');
+	                        $li.removeClass('ui-btn-active');
+	                        $swipeBtn.animate({ width: 0 }, function() {
+	                            $(this).remove();
+	                        });
+                    	});
 
 					}
 
