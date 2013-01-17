@@ -7,14 +7,14 @@
 (function($){
 	var methods = {
 		init : function( options ) {
-			$(this).attr("data-swipeurl",""); //setting data-swipeurl on the li --Added: 2012/12/15
+			//$(this).attr("data-swipeurl",""); //setting data-swipeurl on the li --Added: 2012/12/15
 			var o = $.extend( {}, $.fn.swipeDelete.defaults, options );
-
-			return this.filter('[data-swipeurl]').each(function(i, el){
+			return this.not("[data-swipeurl]").each(function(i, el){
 				var $e = $(el);
 				var $parent = $(el).parent('ul');
-				$e.attr("id" ,"swipe-"+i);
-
+				$e.attr("data-swipeurl","");
+				var uniq = Date.now()+i;
+				$e.attr("id" ,"swipe-"+uniq);
 				$(document).on('swipeleft', "#"+ $e.attr("id"),  function(event){
 					// reference the current item
 					var $li = $(this);
@@ -65,7 +65,7 @@
 		} else if ( typeof method === 'object' || ! method ) {
 			return methods.init.apply( this, arguments );
 		} else {
-			$.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+			$.error( 'Method ' +  method + ' does not exist on jQuery.swipeDelete' );
 		}
 	};
 
